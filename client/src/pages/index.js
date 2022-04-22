@@ -1,0 +1,6 @@
+export {Login} from './Login'
+export {Instalador} from './Instalador'
+export {Home} from './Home'
+export {Controls} from './Controls'
+export {AltasForm} from './AltasForm'
+export {BajasForm} from './BajasForm'
