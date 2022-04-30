@@ -8,7 +8,7 @@ const NavBar = () => {
 
   const { user } = useContext(anonymous)
 
-
+console.log('Se renderizo el Navbar')
 
   return (
     <Box sx={{zIndex:"100",position:"sticky", top:"0px" ,width:"100%", height:"50px",backgroundColor:"#fefefe", display: "flex", justifyContent:"center", alignItems:"center", borderBottom:"solid 1px rgb(205, 211, 214)"}}>

@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser'
 import {usersRouter} from './routes/users.route.js'
+import fileUpload from 'express-fileupload'
 import {connectDB} from './db.js'
 import { port } from './config.js';
 import {dirname , join} from 'path'
@@ -13,6 +14,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(fileUpload({
+    useTempFiles: true ,
+     tempFileDir : './upload'
+    } ))
 
 connectDB()
 

@@ -21,7 +21,27 @@ export const allUsersRequest = async () =>  {
 
 export const newAltaRequest = async (alta) => {
 
-    const sendAlta = await axios.post('/newAlta' , alta)
+    console.log(alta)
 
-    console.log(sendAlta)
+   const form = new FormData()
+
+   for( let key in alta ) {
+       form.append(key,alta[key])
+   }
+
+   const result = await axios.post('/newalta', form , {
+    headers: {
+        "Content-type": "multipart/form-data"
+        }
+    })
+    return result
+
+}
+
+
+export const allAltasRequest = async () => {
+
+    const res = await axios.get('/altas')
+
+    return res
 }

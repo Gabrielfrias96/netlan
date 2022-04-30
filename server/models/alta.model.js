@@ -67,26 +67,22 @@ const alta = new mongoose.Schema({
             trim: true
         }
     },
-    images: [
-        {
-            img : { 
-                type: String,
-                rim: true
-            }
-        },
-        {
-            img : { 
-                type: String,
-                rim: true
-            }
-        },
-        {
-            img : { 
-                type: String,
-                rim: true
-            }
-        }
-    ]
+    img1: {
+        type: String,
+        trim: true
+    },
+    img2: {
+        type: String,
+        trim: true
+    },
+    img3: {
+        type: String,
+        trim: true
+    },
+    timestamp: {
+        type: Date,
+        default: new Date
+    }
 })
 
 

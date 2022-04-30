@@ -1,58 +1,56 @@
-import React, {useContext} from 'react'
+import React, {useContext , useState} from 'react'
+import {useNavigate} from 'react-router'
 import { anonymous} from '../../context/Anonymous'
+
+import Swal from 'sweetalert2'
 import { newAltaRequest } from '../../api/user'
 import {Container, Divider , Paper, Grid, Button,  FormControl, InputLabel,Select , MenuItem , TextField , Box} from '@mui/material/'
 
 const FormAltas = () => {
+    const [disable , setDisable] = useState(false)
+    const navigate = useNavigate()
 
     const {user} = useContext(anonymous)
 
-  
+    let img1;
+    let img2;
+    let img3;
+
 
     const newAlta = {
-        client :{
+        
             name : "",
             dni: "",
             phone:"", 
-            direction:""
-        },
-        service : {
-            type:"",
-            ip: "",
-            cardNum:"",
-            plan:""
-        },
-        installer : {
-            name: user.name, 
-            lastName: user.lastName,
-            dni:user.dni,
-            phone:user.phone
-        },
-        images: [
-            {
-                img :""
-            },
-            {
-                img :""
-            },
-            {
-                img :""
-            },
-        ]
-    }
+            direction:"",
+
+            service_type:"",
+            service_ip: "",
+            service_cardNum:"",
+            service_plan:"",
+            inst_name: user.name, 
+            inst_lastName: user.lastName,
+            inst_dni:user.dni,
+            inst_phone:user.phone
+        }
+        
+    
 
 
     const handleClient = (e) => {
         const names = e.target.name
-        newAlta.client[names] = e.target.value
+        newAlta[names] = e.target.value
         console.log(newAlta)
     }
 
     const handleService = (e) => {
         const names = e.target.name
-        newAlta.service[names] = e.target.value
+        newAlta[names] = e.target.value
         console.log(newAlta)
     }
+
+
+    
 
 
     
@@ -73,10 +71,10 @@ const FormAltas = () => {
                         <Select
                         labelId="demo-simple-select-label"
                         defaultValue=""
-                        name="type"
+                        name="service_type"
                         label="Tipo"
                         onChange={(e)=> {
-                            newAlta.service.type = e.target.value
+                            newAlta.service_type = e.target.value
                             console.log(newAlta)
                         }
                         }
@@ -109,14 +107,14 @@ const FormAltas = () => {
                 <Grid item xs={12} sm={6}>
                     <h3>Datos del Servicio</h3>
                     <Box sx={{margin:"10px 0px"}}>
-                        <TextField name="ip" variant="outlined" label="IP" onChange={handleService}  required />  
+                        <TextField name="service_ip" variant="outlined" label="IP" onChange={handleService}  required />  
                     </Box>
                     <Box sx={{margin:"10px 0px"}}>
-                        <TextField name="cardNum" variant="outlined" onChange={handleService} label="Numero de Tarjeta" required />   
+                        <TextField name="service_cardNum" variant="outlined" onChange={handleService} label="Numero de Tarjeta" required />   
                     </Box>
                     <Box sx={{margin:"10px 0px"}}>
                     {
-                        newAlta.service.type === "FTTH" || newAlta.service.type === "M5"
+                        newAlta.service_type === "FTTH" || newAlta.service_type === "M5"
                         ?   <FormControl sx={{width:"100px"}}>
                                 <InputLabel id="demo-simple-select-label">Plan</InputLabel>
                                 <Select
@@ -125,7 +123,7 @@ const FormAltas = () => {
                                 defaultValue=""
                                 onChange={(e) => { 
                                     
-                                    newAlta.service.plan =  e.target.value
+                                    newAlta.service_plan =  e.target.value
                                     console.log(newAlta)
                                 }}
                                 >
@@ -143,7 +141,7 @@ const FormAltas = () => {
                                 defaultValue=""
                                 label="Plan"
                                 onChange={(e) => { 
-                                    newAlta.service.plan = e.target.value
+                                    newAlta.service_plan = e.target.value
                                 }}
                                 >
                                     <MenuItem value={"1mb"}>1mb</MenuItem>
@@ -157,11 +155,53 @@ const FormAltas = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Box sx={{margin:"10px 0px 25px 0px"}}>
-                        <input type="file" onChange={(e)=> console.log(e.target.files)} multiple />
+                        <input type="file" onChange={(e)=> {
+                            console.log(e.target.files[2])
+                                img1 = e.target.files[0]
+                                img2 = e.target.files[1]
+                                img3 = e.target.files[2]
+                                  
+                            
+                            console.log(img1)
+                        }} multiple />
                     </Box>
                 </Grid>
                 <Grid item xs={12}>
-                    <Button onClick={() => newAltaRequest(newAlta)} variant="contained" color="success" fullWidth>Generar Alta</Button>
+                    { !disable 
+                    
+                    ?  <Button onClick={ async() => {
+                        setDisable(!disable)
+                        try {
+                            const res = await newAltaRequest({...newAlta,img1,img2,img3})
+                            
+                            setDisable(!disable)
+                            
+                           Swal.fire({
+                               position: 'center',
+                               icon: 'success',
+                               title: 'Alta Registrada',
+                               text: `ID del alta ${res.data._id}`,
+                               showConfirmButton: false,
+                               timer: 5000
+                             })
+
+
+                             navigate('/')
+                        } catch (err) {
+                            
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'No pudimos procesar tu Alta, verifica que todos los campos esten llenos',
+                                
+                              })
+                        }
+                        
+                        
+                        
+                }} variant="contained" color="success" fullWidth>Generar Alta</Button>
+                    : <Button variant="contained" color="success" disabled> Generar Alta</Button>
+                    }
                 </Grid>
             </Grid>
         </Paper>
