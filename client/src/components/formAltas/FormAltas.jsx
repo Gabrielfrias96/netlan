@@ -87,30 +87,30 @@ const FormAltas = () => {
                     </FormControl>
                 </Grid>
             </Grid>
-            <Grid container>
+            <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}> 
                     <h3>Datos del Cliente</h3>
                     <Box sx={{margin:"15px 0px"}}>
-                        <TextField name="name" onChange={handleClient} variant="outlined" label="Nombre y Apellido" required />
+                        <TextField fullWidth name="name" onChange={handleClient} variant="outlined" label="Nombre y Apellido" required />
                     </Box>
                     <Box sx={{margin:"15px 0px"}}>
-                        <TextField name="dni" onChange={handleClient} variant="outlined" label="DNI" required />                     
+                        <TextField fullWidth  name="dni" onChange={handleClient} variant="outlined" label="DNI" required />                     
                     </Box>
                     <Box sx={{margon:"15px 0px"}}>     
-                        <TextField name="phone" onChange={handleClient} variant="outlined" label="Telefono" required />
+                        <TextField fullWidth  name="phone" onChange={handleClient} variant="outlined" label="Telefono" required />
                     </Box>
                     <Box sx={{margin:"15px 0px"}}>     
-                        <TextField name="direction" onChange={handleClient} variant="outlined" label="Direccion" required />
+                        <TextField fullWidth  name="direction" onChange={handleClient} variant="outlined" label="Direccion" required />
                     </Box>
 
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <h3>Datos del Servicio</h3>
                     <Box sx={{margin:"10px 0px"}}>
-                        <TextField name="service_ip" variant="outlined" label="IP" onChange={handleService}  required />  
+                        <TextField fullWidth  name="service_ip" variant="outlined" label="IP" onChange={handleService}  required />  
                     </Box>
                     <Box sx={{margin:"10px 0px"}}>
-                        <TextField name="service_cardNum" variant="outlined" onChange={handleService} label="Numero de Tarjeta" required />   
+                        <TextField fullWidth  name="service_cardNum" variant="outlined" onChange={handleService} label="Numero de Tarjeta" required />   
                     </Box>
                     <Box sx={{margin:"10px 0px"}}>
                     {

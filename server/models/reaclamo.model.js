@@ -30,3 +30,5 @@ const reclamo = new mongoose.Schema({
         trim: true
     }
 })
+
+export default mongoose.model('Reclamos', reclamo)

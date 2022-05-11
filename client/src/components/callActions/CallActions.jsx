@@ -14,7 +14,7 @@ const CallActions = () => {
               Ver Altas
           </Paper>
         </Link>
-        <Link to="/altas" style={{textDecoration:"none", color:"#383838"}}>
+        <Link to="/bajas" style={{textDecoration:"none", color:"#383838"}}>
           <Paper 
           elevation={3}
           sx={{width:"180px", height:"100px", borderRadius:"20px", display:"flex" , justifyContent:"center", alignItems:"center", margin:"15px", cursor:"pointer"}}
@@ -22,7 +22,7 @@ const CallActions = () => {
               Ver Reclamos
           </Paper>
         </Link>
-        <Link to="/altas" style={{textDecoration:"none", color:"#383838"}}>
+        <Link to="/pedido/altas" style={{textDecoration:"none", color:"#383838"}}>
           <Paper 
           elevation={3}
           sx={{width:"180px", height:"100px", borderRadius:"20px", display:"flex" , justifyContent:"center", alignItems:"center", margin:"15px", cursor:"pointer"}}

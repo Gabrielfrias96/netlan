@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { createUser , getUsers , getAllUsers , createAlta, getAllAltas , getFilterDNI} from '../controllers/users.controllers.js'
+import { createUser , getUsers , getAllUsers , createAlta, getAllAltas , getFilterDNI, createReclamo , getReclamos} from '../controllers/users.controllers.js'
 
 export const usersRouter = Router()
 
@@ -15,3 +15,7 @@ usersRouter.post('/newalta' , createAlta )
 usersRouter.get('/altas' , getAllAltas)
 
 usersRouter.post('/filterdni' , getFilterDNI)
+
+usersRouter.post('/newbaja' , createReclamo)
+
+usersRouter.get('/getreclamos' , getReclamos)

@@ -1,7 +1,12 @@
 import React from 'react'
+import NavBar from '../components/navbar/NavBar'
+import FormBaja from '../components/formBaja/FormBaja'
 
 export const BajasForm = () => {
   return (
-    <div>BajasForm</div>
+    <>
+    <NavBar/>
+    <FormBaja/>
+    </>
   )
 }

@@ -1,5 +1,6 @@
 import Users from '../models/users.model.js'
 import Altas from '../models/alta.model.js'
+import Reclamos from '../models/reaclamo.model.js'
 import {uploadImage} from '../libs/cloudinary.js'
 
 export const createUser = async  (req, res) => { 
@@ -101,4 +102,18 @@ export const getFilterDNI = async (req, res) => {
      const result = await Altas.find({dni : dni})
 
      res.send(res)
+}
+
+export const createReclamo  = async (req, res) => {
+
+     const result = await Reclamos(req.body).save()
+
+     res.send(result)
+}
+
+export const getReclamos = async (req, res) => {
+
+     const result = await Reclamos.find()
+
+     res.send(result)
 }
