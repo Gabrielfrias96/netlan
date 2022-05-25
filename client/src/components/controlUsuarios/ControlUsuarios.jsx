@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { allUsersRequest } from '../../api/user.js'
 import moment from 'moment'
+import {Link} from 'react-router-dom'
 import {Box , Container ,Paper, Button, Divider, TableRow, TableHead, TableContainer, TableCell, TableBody, Table} from '@mui/material'
 import './controlUsuarios.scss'
 
@@ -33,7 +34,7 @@ const ControlUsuarios = () => {
       <Box
       sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <h2>Usuarios</h2>
-        <Button variant="contained" color="success">Crear Nuevo Usuario</Button>
+        <Link to="/dashboard/usuarios/nuevo"><Button variant="contained" color="success">Crear Nuevo Usuario</Button></Link>
       </Box>
       <Divider></Divider>
       <TableContainer component={Paper}>

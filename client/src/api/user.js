@@ -9,6 +9,12 @@ export const loginRequest = async (user) => {
 
 }
 
+export const createUserRequest = async (user) => {
+
+    const result = await axios.post('/newuser', user)
+    return result
+}
+
 
 export const allUsersRequest = async () =>  {
 
