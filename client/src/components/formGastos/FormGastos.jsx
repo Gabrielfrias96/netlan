@@ -1,8 +1,11 @@
 import React , {useContext} from 'react'
 import {anonymous} from '../../context/Anonymous'
+import {createGastoRequest} from '../../api/gastos'
+import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom'
 import { Container , Paper, Grid, FormControl, Select, MenuItem, InputLabel, TextField, Button } from '@mui/material'
 
-const FormGastos = () => {
+const FormGastos = (props) => {
 
   const {user} = useContext(anonymous)
 
@@ -21,6 +24,23 @@ const FormGastos = () => {
       newTicket[e.target.name] = e.target.value
 
       console.log(newTicket)
+  }
+
+  const handleSubmit =  () => {
+
+    createGastoRequest(newTicket)
+    .then(res => {
+      console.log(res)
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'El Ticket se Genero correctamente.',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    })
+
+    
   }
 
 
@@ -58,7 +78,7 @@ const FormGastos = () => {
               <TextField type="number" name="amount" label="Monto" onChange={handleValue} />
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" color="success" onClick={() => console.log(newTicket)}>Generar Ticket</Button>
+              <Link to='/'><Button variant="contained" color="success" onClick={handleSubmit}>Generar Ticket</Button></Link>
             </Grid>
 
           </Grid>

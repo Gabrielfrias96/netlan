@@ -1,5 +1,6 @@
 import Users from '../models/users.model.js'
 import Altas from '../models/alta.model.js'
+import Gastos from '../models/gastos.model.js'
 import Reclamos from '../models/reaclamo.model.js'
 import {uploadImage} from '../libs/cloudinary.js'
 
@@ -116,4 +117,11 @@ export const getReclamos = async (req, res) => {
      const result = await Reclamos.find()
 
      res.send(result)
+}
+
+export const newGasto = async (req, res) => {
+
+     const createGasto = await Gastos(req.body).save()
+
+     res.send(createGasto)
 }
